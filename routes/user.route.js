@@ -1,0 +1,17 @@
+let express = require('express');
+let router = express.Router();
+let authController = require('./controller/auth');
+let signInController = require('./controller/sign_in');
+let createController = require('./controller/create');
+let updateController = require('./controller/update');
+let deleteController = require('./controller/delete');
+let likeController = require('./controller/likes');
+router.post('/signUp', authController.signUp);
+router.post('/signIn', signInController.verifytoken, signInController.signIn);
+router.post('/createPost', createController.up, signInController.verifytoken, createController.post);
+router.post('/updatePost', signInController.verifytoken, updateController.update);
+router.post('/updatePosts', createController.up, updateController.updatePost);
+router.post('/likesPost', signInController.verifytoken, likeController.likes);
+router.post('/deletePosts', deleteController.deletePost);
+router.post('/deleteComment', deleteController.deleteComment);
+module.exports = router;
